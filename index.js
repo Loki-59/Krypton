@@ -1,13 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 import authRoutes from './routes/auth.js';
 import cryptoRoutes from './routes/crypto.js';
 import userRoutes from './routes/user.js';
+import connectDB from './db.js';
+
 
 dotenv.config();
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,14 +19,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
-const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/krypton_db';
-mongoose.connect(mongoUri, {
-  serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-  socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
-})
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+
 
 // Routes
 app.use('/api/auth', authRoutes);

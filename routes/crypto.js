@@ -5,7 +5,8 @@ const router = express.Router();
 
 // Initialize CoinGecko client
 const client = new Coingecko({
-  environment: 'demo', // Use demo environment for free tier
+  apiKey: process.env.COINGECKO_URI,
+  environment: 'production', // Use production environment with API key
 });
 
 // Get market data

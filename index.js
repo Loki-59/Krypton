@@ -27,7 +27,7 @@ app.use('/api/crypto', cryptoRoutes);
 app.use('/api/user', userRoutes);
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ status: 'OK', message: 'Krypton API is running' });
 });
 
